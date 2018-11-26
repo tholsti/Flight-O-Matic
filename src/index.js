@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import './index.css';
 import './index.html';
-import FlightList from './flight_list/flight_list.jsx';
+import FlightList from './FlightList/FlightList.jsx';
 
 
 class App extends React.Component {

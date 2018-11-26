@@ -1,33 +1,34 @@
 import React from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import {parseDate} from '../../helpers.js'
 
 export default class StartDate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            startDate: new Date()
+            pickedDate: new Date()
         }
         this.setDate = this.setDate.bind(this)
     }
     
 
     setDate = (e) => {
-        let date = e.getDate() + '/' + (e.getMonth() + 1) + '/' + e.getUTCFullYear()
-        console.log(e)
+        let date = parseDate(e)
+        console.log(date)
+        
         this.setState({
-            startDate : e
+            pickedDate : e
         })
         this.props.setDate({date : date})
     }
       
     render() {
         return (
-        <div>
+        <div className="datePick">
             <p>Start date:</p>
             <DatePicker 
-                selected={this.state.startDate}
+                selected={this.state.pickedDate}
                 onSelect={this.setDate}
                 dateFormat="MMMM d, yyyy"
             />

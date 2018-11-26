@@ -1,10 +1,10 @@
 import React from 'react';
 import FlightItem from '../flight_item/flight_item.jsx';
-import DropDown from '../drop-down/drop-down.jsx';
+import FindFlights from '../FindFlights/FindFlights.jsx';
 import { DateTime } from 'luxon';
-import StartDate from './StartDate/StartDate.jsx'
+import { parseDate } from '../helpers.js';
 
-export default class FlightList extends React.Component {
+export default class FindFlight extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,18 +15,17 @@ export default class FlightList extends React.Component {
       origin: '',
       destination: '',
       flightsNumber: 5,
-      startDate: null,
-
     }
-
   }
 
 
   selectedRoute = (data) => {
-    console.log(this.state.startDate)
+    console.log(data)
     if (data) {
-      this.setState({ isLoading: true })
-      fetch(`https://api.skypicker.com/flights?flyFrom=${data.origin}&to=${data.destination}&dateFrom=${this.state.startDate}&dateTo=19/12/2018&partner=picky&direct_flights=${data.direct}`)
+      this.setState({ 
+        isLoading: true
+      })
+      fetch(`https://api.skypicker.com/flights?flyFrom=${data.origin}&to=${data.destination}&dateFrom=${data.startDate}&dateTo=${data.endDate}&partner=picky&direct_flights=${data.direct}`)
         .then(resp => resp.json())
         .then(json => {
           this.setState({
@@ -35,19 +34,13 @@ export default class FlightList extends React.Component {
             destination: data.destination,
             isLoading: false,
             searched: "small",
+            startDate: data.startDate,
+            endDate: data.endDate
           });
         });
     }
-
   }
-
-  setStartDate = (date) => {
-
-    this.setState({
-      startDate: date.date
-    })
-    console.log(date.date)
-  }
+ 
 
   showMore = ()  => {
     this.setState({flightsNumber: this.state.flightsNumber + 5});
@@ -61,7 +54,7 @@ export default class FlightList extends React.Component {
             <div className="title">
               <h1>SkyScammer</h1>
             </div>
-            <DropDown />
+            <FindFlights />
           </header>
 
           <div className="flight_list">
@@ -88,8 +81,8 @@ export default class FlightList extends React.Component {
           <div className="title">
             <h1>SkyScammer</h1>
           </div>
-          <StartDate setDate={this.setStartDate}/>
-          <DropDown action={this.selectedRoute} showMore={this.showMore} />
+          
+          <FindFlights action={this.selectedRoute} showMore={this.showMore} />
         </header>
         <h3>Displaying flights from {this.state.origin} to {this.state.destination}</h3>
 
