@@ -2,6 +2,7 @@ import React from 'react';
 import FlightItem from '../flight_item/flight_item.jsx';
 import DropDown from '../drop-down/drop-down.jsx';
 import { DateTime } from 'luxon';
+import StartDate from './StartDate/StartDate.jsx'
 
 export default class FlightList extends React.Component {
   constructor(props) {
@@ -14,15 +15,18 @@ export default class FlightList extends React.Component {
       origin: '',
       destination: '',
       flightsNumber: 5,
+      startDate: null,
+
     }
 
   }
 
 
   selectedRoute = (data) => {
+    console.log(this.state.startDate)
     if (data) {
       this.setState({ isLoading: true })
-      fetch(`https://api.skypicker.com/flights?flyFrom=${data.origin}&to=${data.destination}&dateFrom=16/11/2018&dateTo=19/11/2018&partner=picky&direct_flights=${data.direct}`)
+      fetch(`https://api.skypicker.com/flights?flyFrom=${data.origin}&to=${data.destination}&dateFrom=${this.state.startDate}&dateTo=19/12/2018&partner=picky&direct_flights=${data.direct}`)
         .then(resp => resp.json())
         .then(json => {
           this.setState({
@@ -30,12 +34,19 @@ export default class FlightList extends React.Component {
             origin: data.origin,
             destination: data.destination,
             isLoading: false,
-            searched: "small"
-            
+            searched: "small",
           });
         });
     }
 
+  }
+
+  setStartDate = (date) => {
+
+    this.setState({
+      startDate: date.date
+    })
+    console.log(date.date)
   }
 
   showMore = ()  => {
@@ -77,6 +88,7 @@ export default class FlightList extends React.Component {
           <div className="title">
             <h1>SkyScammer</h1>
           </div>
+          <StartDate setDate={this.setStartDate}/>
           <DropDown action={this.selectedRoute} showMore={this.showMore} />
         </header>
         <h3>Displaying flights from {this.state.origin} to {this.state.destination}</h3>
@@ -99,7 +111,7 @@ export default class FlightList extends React.Component {
                 DateTime.fromMillis(flight.aTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
               originCity={flight.cityFrom}
               destinationCity={flight.cityTo}
-              flightPrice={flight.price * 1000}
+              flightPrice={flight.price}
               stopOvers={flight.route.length - 1}
             />
           )}
