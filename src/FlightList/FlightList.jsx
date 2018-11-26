@@ -1,5 +1,5 @@
 import React from 'react';
-import FlightItem from '../flight_item/flight_item.jsx';
+import Flight from '../Flight/Flight.jsx';
 import FindFlights from '../FindFlights/FindFlights.jsx';
 import { DateTime } from 'luxon';
 import { parseDate } from '../helpers.js';
@@ -14,7 +14,8 @@ export default class FindFlight extends React.Component {
       searched: "big",
       origin: '',
       destination: '',
-      flightsNumber: 5,
+      flightsNumber: 10,
+
     }
   }
 
@@ -35,7 +36,10 @@ export default class FindFlight extends React.Component {
             isLoading: false,
             searched: "small",
             startDate: data.startDate,
-            endDate: data.endDate
+            endDate: data.endDate,
+            connectionsFound: json.data.length,
+            flightsNumber: 10
+
           });
         });
     }
@@ -59,6 +63,7 @@ export default class FindFlight extends React.Component {
 
           <div className="flight_list">
             <div className="flight-item">
+              <div className="info-btn"> </div>
               <div className="flight-prop col-name">Departure time</div>
               <div className="flight-prop col-name">Arrival time</div>
               <div className="flight-prop col-name">Origin city</div>
@@ -88,6 +93,7 @@ export default class FindFlight extends React.Component {
 
         <div className="flight_list">
           <div className="flight-item">
+            <div className="info-btn"> </div>
             <div className="flight-prop col-name">Departure time</div>
             <div className="flight-prop col-name">Arrival time</div>
             <div className="flight-prop col-name">Origin city</div>
@@ -97,7 +103,8 @@ export default class FindFlight extends React.Component {
 
           </div>
           {this.state.flights.slice(0, this.state.flightsNumber).map(
-            flight => <FlightItem
+            (flight, index) => <Flight
+              number={index}
               departureTime={
                 DateTime.fromMillis(flight.dTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
               arrivalTime={
@@ -109,6 +116,15 @@ export default class FindFlight extends React.Component {
             />
           )}
 
+        </div>
+        <div className="connectionsFound">
+          {this.state.connectionsFound ? 
+          <div>Number of connections found: {this.state.connectionsFound}<br></br>
+          </div>
+          : ""}
+          {this.state.connectionsFound > this.state.flightsNumber &&
+            <button className="showmore" onClick={ this.showMore}>Show more</button>
+          }
         </div>
       </>
     )

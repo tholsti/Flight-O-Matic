@@ -81,7 +81,6 @@ export default class FindFlights extends React.Component {
                                         
                 </div>    
                 <div className="buttons">
-                    <button className="showmore" onClick={ this.props.showMore}>Show more</button>
                     <button className="searchbtn" onClick={this.action}>Search!</button>
                 </div>
             </div>

@@ -132,3 +132,8 @@ select {
 .col-name {
   font-weight: bold;
 }
+
+.info-btn {
+  width:20px;
+  cursor: pointer;
+}
