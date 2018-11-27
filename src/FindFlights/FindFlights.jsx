@@ -37,8 +37,9 @@ export default class FindFlights extends React.Component {
     }
 
     setOrigin = (city) => {
+        console.log(city)
         this.setState({
-            origin: city
+            origin: city.city
         })
     }
 
@@ -49,7 +50,7 @@ export default class FindFlights extends React.Component {
 
         
         this.props.action({
-            origin: document.getElementById('origin').value,
+            origin: this.state.origin,
             destination: document.getElementById('destination').value,
             direct: (document.getElementById('direct_flights').checked ? 1 : 0),
             startDate: this.state.startDate,

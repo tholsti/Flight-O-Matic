@@ -2,15 +2,18 @@ import React, { Component } from 'react'
 import Cities from './Cities/Cities.jsx'
 
 export default class FindCity extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       citiesFound: false,
-      cities: []
+      cities: [],
+      pickedCity: ""
     }
   }
 
   componentDidMount() {
+    console.log(this.props)
     let citySearch = document.getElementById('find_city')
     citySearch.addEventListener('keyup', () => {
       if (citySearch.value.length >= 3) { 
@@ -47,7 +50,7 @@ export default class FindCity extends Component {
       <div>
         <input type="text" name="find_city" id="find_city"/>
         {this.state.citiesFound == true ? 
-        <Cities cities={this.state.cities} action={setCity} />:
+        <Cities cities={this.state.cities} pickCity={this.props.setCity} />:
         ""}
       </div>
     )
