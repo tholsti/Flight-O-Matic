@@ -30,7 +30,7 @@ export default class FindCity extends Component {
               if (city.airports > 0){ 
                 this.setState({
                   citiesFound: true,
-                  cities: [...this.state.cities, city.name]
+                  cities: [...this.state.cities, city]
                 })}
               }
           )
@@ -48,6 +48,7 @@ export default class FindCity extends Component {
   render() {
     return (
       <div>
+        <p>Leaving from:</p>
         <input type="text" name="find_city" id="find_city"/>
         {this.state.citiesFound == true ? 
         <Cities cities={this.state.cities} pickCity={this.props.setCity} />:

@@ -66,16 +66,6 @@ export default class FindFlights extends React.Component {
                     <EndDate setDate={this.setEndDate}/>
                     <FindCity setCity={this.setOrigin} ></FindCity>
     
-                    {/* <div className="cityPick">
-                        <p>Departure City</p>
-                        <select id="origin" className="origins">
-                            { origins.map((origin, i)  => 
-                                <option value={origin} key={i} selected={(origin == this.state.origin) ? true : false }>{origin}</option>
-                            )
-                            }   
-        
-                        </select>
-                    </div> */}
                     <div className="cityPick">
                         <p>Destination City</p>
                         <select id="destination">

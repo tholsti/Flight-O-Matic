@@ -56,7 +56,7 @@ export default class FindFlight extends React.Component {
         <>
           <header className={this.state.searched}>
             <div className="title">
-              <h1>SkyScammer</h1>
+              <h1>Flight-O-Matic</h1>
             </div>
             <FindFlights />
           </header>
@@ -75,24 +75,30 @@ export default class FindFlight extends React.Component {
       <>
         <header className={this.state.searched}>
           <div className="title">
-            <h1>SkyScammer</h1>
+            <h1>Flight-O-Matic</h1>
           </div>
           
           <FindFlights action={this.selectedRoute} showMore={this.showMore} />
         </header>
-        <h3>Displaying flights from {this.state.origin} to {this.state.destination}</h3>
+        <div>
+          { this.state.flights.length > 0 && 
+          <h3>Displaying flights from {this.state.origin} to {this.state.destination}</h3>
+          }
+        </div>
 
-        <div className="flight_list">
-          <div className="flight-item">
-            <div className="info-btn"> </div>
-            <div className="flight-prop col-name">Departure time</div>
-            <div className="flight-prop col-name">Arrival time</div>
-            <div className="flight-prop col-name">Origin city</div>
-            <div className="flight-prop col-name">Destination city</div>
-            <div className="flight-prop col-name">Price</div>
-            <div className="flight-prop col-name">Stopovers</div>
-
+        <div className="flight_list"><div>
+        { this.state.flights.length > 0 && 
+            <div className="flight-item">
+              <div className="info-btn"> </div>
+              <div className="flight-prop col-name">Departure time</div>
+              <div className="flight-prop col-name">Arrival time</div>
+              <div className="flight-prop col-name">Origin city</div>
+              <div className="flight-prop col-name">Destination city</div>
+              <div className="flight-prop col-name">Price</div>
+              <div className="flight-prop col-name">Stopovers</div>
+            </div>}
           </div>
+
           {this.state.flights.slice(0, this.state.flightsNumber).map(
             (flight, index) => <Flight
               number={index}

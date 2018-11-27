@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import './index.css';
 import './index.html';
 import FlightList from './FlightList/FlightList.jsx';
+import './css/app.scss'
 
 
 class App extends React.Component {

@@ -24,9 +24,9 @@ export default class Flight extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="flight-item">
-          <div className="info-btn" onClick={this.handleClick}>{this.props.number + 1}</div>
+      <div className="flight-result">
+        <div className="flight-item" onClick={this.handleClick}>
+          <div className="info-btn" >{this.props.number + 1}</div>
           <div className="flight-prop">{this.props.departureTime}</div>
           <div className="flight-prop">{this.props.arrivalTime}</div>
           <div className="flight-prop">{this.props.originCity}</div>
