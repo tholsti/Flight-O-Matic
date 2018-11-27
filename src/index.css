@@ -137,3 +137,19 @@ select {
   width:20px;
   cursor: pointer;
 }
+
+#citiesList {
+  position: absolute;
+}
+.city {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  top: 0px;
+}
+.city:hover {
+  color:black;
+}
+.citySearch {
+  position: fixed;
+}

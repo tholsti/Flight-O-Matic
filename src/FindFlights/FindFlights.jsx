@@ -3,6 +3,7 @@ import { timingSafeEqual } from 'crypto';
 import StartDate from './StartDate/StartDate.jsx'
 import EndDate from './EndDate/EndDate.jsx'
 import { parseDate } from '../helpers.js';
+import FindCity from './FindCity/FindCity.jsx'
 
 
 const destinations = ['Valencia', 'Barcelona', 'Madrid', 'Milan', 'Athens',  'Helsinki', 'Kittila', 'Stockholm'];
@@ -35,6 +36,12 @@ export default class FindFlights extends React.Component {
         })
     }
 
+    setOrigin = (city) => {
+        this.setState({
+            origin: city
+        })
+    }
+
     action = (e) => {
         // console.log("origin:" + document.getElementById('origin').value)
         // console.log("destination:" + document.getElementById('destination').value)
@@ -56,8 +63,9 @@ export default class FindFlights extends React.Component {
                 <div className="search">
                     <StartDate setDate={this.setStartDate}/>
                     <EndDate setDate={this.setEndDate}/>
+                    <FindCity setCity={this.setOrigin} ></FindCity>
     
-                    <div className="cityPick">
+                    {/* <div className="cityPick">
                         <p>Departure City</p>
                         <select id="origin" className="origins">
                             { origins.map((origin, i)  => 
@@ -66,7 +74,7 @@ export default class FindFlights extends React.Component {
                             }   
         
                         </select>
-                    </div>
+                    </div> */}
                     <div className="cityPick">
                         <p>Destination City</p>
                         <select id="destination">

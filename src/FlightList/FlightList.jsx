@@ -62,16 +62,7 @@ export default class FindFlight extends React.Component {
           </header>
 
           <div className="flight_list">
-            <div className="flight-item">
-              <div className="info-btn"> </div>
-              <div className="flight-prop col-name">Departure time</div>
-              <div className="flight-prop col-name">Arrival time</div>
-              <div className="flight-prop col-name">Origin city</div>
-              <div className="flight-prop col-name">Destination city</div>
-              <div className="flight-prop col-name">Price</div>
-              <div className="flight-prop col-name">Stopovers</div>
-
-            </div>
+            
             <div className="spinner-container">
               <img className="loading-spinner" src="https://www.flightcomp.de/wp-content/plugins/gravityforms/images/spinner.gif" />
               Hold tight, fetching flights...
