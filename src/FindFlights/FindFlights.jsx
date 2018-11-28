@@ -39,7 +39,14 @@ export default class FindFlights extends React.Component {
     setOrigin = (city) => {
         console.log(city)
         this.setState({
-            origin: city.city
+            origin: city.id
+        })
+    }
+
+    setDestination = (city) => {
+        console.log(city)
+        this.setState({
+            destination: city.id
         })
     }
 
@@ -51,7 +58,7 @@ export default class FindFlights extends React.Component {
         
         this.props.action({
             origin: this.state.origin,
-            destination: document.getElementById('destination').value,
+            destination: this.state.destination,
             direct: (document.getElementById('direct_flights').checked ? 1 : 0),
             startDate: this.state.startDate,
             endDate: this.state.endDate
@@ -62,24 +69,20 @@ export default class FindFlights extends React.Component {
         return (
             <div>
                 <div className="search">
-                    <StartDate setDate={this.setStartDate}/>
-                    <EndDate setDate={this.setEndDate}/>
-                    <FindCity setCity={this.setOrigin} ></FindCity>
-    
-                    <div className="cityPick">
-                        <p>Destination City</p>
-                        <select id="destination">
-                            { destinations.map((destination, i) =>
-                                <option key={i}>{destination}</option>
-                            )
-                            }  
-                        </select>
+                    <div className="dates">
+                        <StartDate setDate={this.setStartDate}/>
+                        <EndDate setDate={this.setEndDate}/>
                     </div>
+                    <div className="locations">
+                        <FindCity point="origin" setCity={this.setOrigin} ></FindCity>
+                        <FindCity point="destination" setCity={this.setDestination} ></FindCity>
+                    </div>
+    
                     <br /> 
-                    <input type="checkbox" name="checkbox" id="direct_flights"/>direct flights only <br></br>
+                    <p><input type="checkbox" name="checkbox" id="direct_flights"/>direct flights only</p>
                                         
                 </div>    
-                <div className="buttons">
+                <div className="button-container">
                     <button className="searchbtn" onClick={this.action}>Search!</button>
                 </div>
             </div>

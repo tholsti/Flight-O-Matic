@@ -31,13 +31,13 @@ export default class Flight extends React.Component {
           <div className="flight-prop">{this.props.arrivalTime}</div>
           <div className="flight-prop">{this.props.originCity}</div>
           <div className="flight-prop">{this.props.destinationCity}</div>
-          <div className="flight-prop">${this.props.flightPrice} <b>BARGAIN!</b></div>
+          <div className="flight-prop">{this.props.flightPrice} EUR <b>BARGAIN!</b></div>
           <div className="flight-prop">{this.props.stopOvers}</div>
         </div>
-        {this.state.additionalInfoVisible == true &&
-        <div className="additionalInfo" id="additionalInfo">
-          Here will be additional info about flights
-        </div>}
+          {this.state.additionalInfoVisible == true &&
+          <div className="additionalInfo" id="additionalInfo">
+            Here will be additional info about flights
+          </div>}
       </div>
     );
   }

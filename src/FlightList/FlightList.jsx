@@ -15,7 +15,7 @@ export default class FindFlight extends React.Component {
       origin: '',
       destination: '',
       flightsNumber: 10,
-
+      data: null
     }
   }
 
@@ -38,7 +38,8 @@ export default class FindFlight extends React.Component {
             startDate: data.startDate,
             endDate: data.endDate,
             connectionsFound: json.data.length,
-            flightsNumber: 10
+            flightsNumber: 10,
+            data: json.data
 
           });
         });
@@ -64,7 +65,7 @@ export default class FindFlight extends React.Component {
           <div className="flight_list">
             
             <div className="spinner-container">
-              <img className="loading-spinner" src="https://www.flightcomp.de/wp-content/plugins/gravityforms/images/spinner.gif" />
+              <img className="loading-spinner" src="../src/img/spinner.gif" />
               Hold tight, fetching flights...
             </div>
           </div>
@@ -77,8 +78,9 @@ export default class FindFlight extends React.Component {
           <div className="title">
             <h1>Flight-O-Matic</h1>
           </div>
-          
-          <FindFlights action={this.selectedRoute} showMore={this.showMore} />
+          <div className="search-panel">
+            <FindFlights action={this.selectedRoute} showMore={this.showMore} />
+          </div>
         </header>
         <div>
           { this.state.flights.length > 0 && 
@@ -88,7 +90,7 @@ export default class FindFlight extends React.Component {
 
         <div className="flight_list"><div>
         { this.state.flights.length > 0 && 
-            <div className="flight-item">
+            <div className="flight-item-titles">
               <div className="info-btn"> </div>
               <div className="flight-prop col-name">Departure time</div>
               <div className="flight-prop col-name">Arrival time</div>
@@ -114,15 +116,15 @@ export default class FindFlight extends React.Component {
           )}
 
         </div>
+        {this.state.connectionsFound &&
         <div className="connectionsFound">
-          {this.state.connectionsFound ? 
           <div>Number of connections found: {this.state.connectionsFound}<br></br>
           </div>
-          : ""}
           {this.state.connectionsFound > this.state.flightsNumber &&
             <button className="showmore" onClick={ this.showMore}>Show more</button>
           }
         </div>
+        }
       </>
     )
   }

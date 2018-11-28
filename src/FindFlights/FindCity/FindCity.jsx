@@ -14,7 +14,7 @@ export default class FindCity extends Component {
 
   componentDidMount() {
     console.log(this.props)
-    let citySearch = document.getElementById('find_city')
+    let citySearch = document.getElementById(`find_city-${this.props.point}`)
     citySearch.addEventListener('keyup', () => {
       if (citySearch.value.length >= 3) { 
         this.setState({
@@ -47,11 +47,23 @@ export default class FindCity extends Component {
 
   render() {
     return (
-      <div>
-        <p>Leaving from:</p>
-        <input type="text" name="find_city" id="find_city"/>
+      <div className="locationPick">
+        {this.props.point == "origin" ?
+        <p>Flying from:</p>
+        : <p>Flying to:</p>}
+        <input 
+          type="text" 
+          name={`find-${this.props.point}`} 
+          id={`find_city-${this.props.point}`} 
+          placeholder={this.props.point == "origin" ?
+            "e.g. Prague" : "e.g. London"}
+        />
         {this.state.citiesFound == true ? 
-        <Cities cities={this.state.cities} pickCity={this.props.setCity} />:
+        <Cities 
+          point={this.props.point} 
+          cities={this.state.cities} 
+          pickCity={this.props.setCity} 
+        />:
         ""}
       </div>
     )

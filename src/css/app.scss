@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Exo');
+@import './_mixins.scss';
+
 
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 html {
@@ -12,7 +15,9 @@ html {
 h1 {
   color: white;
   font-size: 5rem;
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Exo';
+  font-weight: bolder;
+  font-style: italic;
 }
 
 h3 {
@@ -24,27 +29,13 @@ b {
   color: red;
 }
 
-.buttons {
-  text-align: center;
-  padding-top: 1rem;
-}
 
 /* HEADER
 *************************************************/
 
-@mixin header {
-  width: 100%;
-  background-image: url('../img/sky.jpg');
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  transition: 1s;
-}
-
 .small {
   height: 60vh;
+  margin-bottom: 1.5rem;
   @include header;
 }
 
@@ -62,28 +53,51 @@ b {
 /* USER INPUT
 ***********************************************/
 
-.search {
+.search-panel {
+  display:flex;
+  justify-content: center;
   width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: white;
+  padding: 1rem;
+  background-color: rgba(0,0,0,.3);
+  background-blend-mode: color-dodge;
 }
 
-@mixin button {
-  height: 3rem;
-  width: 15rem;
-  background-color: rgb(120, 236, 120);
-  border-radius: 5rem;
+.search {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   color: white;
-  font-size: 1.5rem;
-  font-weight: 200;
-  border: none;
+  p {
+    margin: 0 .5rem 0 .5rem;
+  }
+  input {
+    margin: 0 .5rem 1rem .5rem;
+  }
+}
+
+.locations {
+  display:flex;
+  flex-direction: row;
+}
+
+.locationPick {
+  position: relative;
+}
+
+.dates {
+  display:flex;
+  flex-direction: row;
+}
+
+.button-container {
+  text-align: center;
 }
 
 .searchbtn {
   @include button;
   background-color: rgb(120, 236, 120);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 select {
@@ -94,13 +108,15 @@ select {
   text-align: center;
 }
 
-#citiesList {
-  position: absolute;
-  background-color:white;
-  color: black;
-  padding: .5rem;
-  margin-top: 0;
-  min-width: 200px;
+ul[id^="citiesList-"] {
+    position: absolute;
+    background-color: white;
+    color: black;
+    padding: .5rem;
+    margin-top: 0;
+    min-width: 10rem;
+    top: 41px;
+    left: 10px;
 }
 .city {
   list-style: none;
@@ -128,30 +144,39 @@ select {
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: 25vw;
-  top: 25vh;
-  background-color: white;
-  opacity: .9;
-  width: 50vw;
-  height: 50vh;
-  border: 1px solid black;
-  border-radius: 5em;
+  left: 25vmin;
   justify-content: center;
   align-items: center;
+  top: 25vmin;
+  opacity: .9;
+  width: 50vmin;
+  height: 50vmin;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5em;
 }
 
 /* RESULTS DISPLAY
 ************************************************/
 
-.flight-item {
+.flight-item-titles {
   display:flex;
   flex-direction: row;
   justify-content: space-around;
-  padding: .5em;
+  padding: 1rem .5rem .5rem .5rem;
+}
+.flight-item {
+  @extend .flight-item-titles;
   cursor: pointer;
 }
+
 .flight-item:hover {
-  background-color: yellow;
+  background-color: lightyellow;
+}
+.flight-result {
+  display:flex;
+  flex-direction: column;
+  border-top: 1px solid grey;
 }
 
 .flight-prop {
@@ -177,3 +202,5 @@ select {
   background-color: rgb(120, 209, 236);
   margin-bottom: 1rem;
 }
+
+@import './_mobile.scss';
