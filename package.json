@@ -2,33 +2,29 @@
   "name": "demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -d",
-    "watch": "webpack -wd",
-    "build:prod": "webpack -p"
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "css-loader": "^1.0.1",
-    "file-loader": "^2.0.0",
-    "node-sass": "^4.10.0",
-    "react-datepicker": "^2.0.0",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.26.1",
-    "webpack-cli": "^3.1.2"
+    "nodemon": "^1.18.8"
   },
   "dependencies": {
-    "luxon": "^1.5.0",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0"
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.16",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.9.0"
   }
 }
