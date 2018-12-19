@@ -48,17 +48,17 @@ export default class FindCity extends Component {
   render() {
     return (
       <div className="locationPick">
-        {this.props.point == "origin" ?
+        {this.props.point === "origin" ?
         <p>Flying from:</p>
         : <p>Flying to:</p>}
         <input 
           type="text" 
           name={`find-${this.props.point}`} 
           id={`find_city-${this.props.point}`} 
-          placeholder={this.props.point == "origin" ?
+          placeholder={this.props.point === "origin" ?
             "e.g. Prague" : "e.g. London"}
         />
-        {this.state.citiesFound == true ? 
+        {this.state.citiesFound === true ? 
         <Cities 
           point={this.props.point} 
           cities={this.state.cities} 

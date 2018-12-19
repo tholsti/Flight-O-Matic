@@ -2,7 +2,6 @@ import React from 'react';
 import Flight from '../Flight/Flight.jsx';
 import FindFlights from '../FindFlights/FindFlights.jsx';
 import { DateTime } from 'luxon';
-import { parseDate } from '../helpers.js';
 
 export default class FindFlight extends React.Component {
   constructor(props) {
@@ -52,7 +51,7 @@ export default class FindFlight extends React.Component {
   }
   
   render() {
-    if (this.state.isLoading == true) {
+    if (this.state.isLoading === true) {
       return (
         <>
           <header className={this.state.searched}>
@@ -65,7 +64,7 @@ export default class FindFlight extends React.Component {
           <div className="flight_list">
             
             <div className="spinner-container">
-              <img className="loading-spinner" src="../src/img/spinner.gif" />
+              <img className="loading-spinner" alt="loading spinner" src="../src/img/spinner.gif" />
               Hold tight, fetching flights...
             </div>
           </div>

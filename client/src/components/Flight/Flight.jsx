@@ -8,10 +8,9 @@ export default class Flight extends React.Component {
     this.state = {
       additionalInfoVisible: false
     }
-    this.handleClick = this.handleClick.bind(this)
-  }
+  }s
 
-  handleClick() {
+  handleClick = () => {
     console.log(this.state.additionalInfoVisible);
     this.state.additionalInfoVisible ? 
       this.setState({
@@ -34,7 +33,7 @@ export default class Flight extends React.Component {
           <div className="flight-prop">{this.props.flightPrice} EUR <b>BARGAIN!</b></div>
           <div className="flight-prop">{this.props.stopOvers}</div>
         </div>
-          {this.state.additionalInfoVisible == true &&
+          {this.state.additionalInfoVisible === true &&
           <div className="additionalInfo" id="additionalInfo">
             Here will be additional info about flights
           </div>}

@@ -1,14 +1,8 @@
 import React from 'react';
-import { timingSafeEqual } from 'crypto';
 import StartDate from './StartDate/StartDate.jsx'
 import EndDate from './EndDate/EndDate.jsx'
-import { parseDate } from '../helpers.js';
+import { parseDate } from '../../helpers.js';
 import FindCity from './FindCity/FindCity.jsx'
-
-
-const destinations = ['Valencia', 'Barcelona', 'Madrid', 'Milan', 'Athens',  'Helsinki', 'Kittila', 'Stockholm'];
-const origins = ['Prague', 'Berlin', 'Warsaw', 'Pardubice'];
-
 
 export default class FindFlights extends React.Component {
     constructor(props) {
@@ -51,11 +45,6 @@ export default class FindFlights extends React.Component {
     }
 
     action = (e) => {
-        // console.log("origin:" + document.getElementById('origin').value)
-        // console.log("destination:" + document.getElementById('destination').value)
-        // console.log(document.getElementById('direct_flights').checked);
-
-        
         this.props.action({
             origin: this.state.origin,
             destination: this.state.destination,

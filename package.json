@@ -16,6 +16,11 @@
     "nodemon": "^1.18.8"
   },
   "dependencies": {
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.15",
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-router-dom": "^4.3.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
@@ -25,6 +30,7 @@
     "mongoose": "^5.3.16",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "typescript": "^3.2.2",
     "validator": "^10.9.0"
   }
 }
