@@ -24,3 +24,8 @@ public
 # Config keys
 
 config/keys.js
+
+# Env variables
+
+.env
+client/.env

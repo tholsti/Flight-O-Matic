@@ -8,7 +8,7 @@ export default class Flight extends React.Component {
     this.state = {
       additionalInfoVisible: false
     }
-  }s
+  }
 
   handleClick = () => {
     console.log(this.state.additionalInfoVisible);

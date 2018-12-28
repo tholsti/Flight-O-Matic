@@ -16,11 +16,6 @@
     "nodemon": "^1.18.8"
   },
   "dependencies": {
-    "@types/jest": "^23.3.10",
-    "@types/node": "^10.12.15",
-    "@types/react": "^16.7.17",
-    "@types/react-dom": "^16.0.11",
-    "@types/react-router-dom": "^4.3.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",

@@ -1,0 +1,10 @@
+{
+    "extends": ["@socifi", 
+        "@socifi/eslint-config/react"
+        ],
+    "rules": {
+        "typescript/explicit-member-accessibility": 0,
+        "react/jsx-curly-brace-presence": 0
+    }
+
+}

@@ -2,15 +2,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import FlightList from './components/layout/FlightList.jsx';
+import FlightList from './components/layout/FlightList';
 import Navbar from './components/layout/Navbar';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
-
 import './css/app.scss';
-
-
 
 class App extends React.Component {
   render() {
@@ -18,9 +15,9 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <Navbar />
-            <Route exact path="/" component={FlightList} />
-            <Route exact path="/register" component={ Register } />
-            <Route exact path="/login" component={ Login } />
+          <Route exact path="/" component={FlightList} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
         </div>
       </Router>)
   }
