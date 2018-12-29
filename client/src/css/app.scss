@@ -178,6 +178,14 @@ ul[id^="citiesList-"] {
 /* RESULTS DISPLAY
 ************************************************/
 
+.results-container {
+  display: flex;
+}
+
+.results {
+  flex-grow: 1;
+}
+
 .flight-item-titles {
   display:flex;
   flex-direction: row;
@@ -221,5 +229,38 @@ ul[id^="citiesList-"] {
   background-color: rgb(120, 209, 236);
   margin-bottom: 1rem;
 }
+
+/* FILTERS
+*********************************/
+
+.filters-panel {
+  padding: .5rem;
+  width: 15rem;
+}
+
+.filter-container {
+  border: 1px solid black;
+  padding: .5rem;
+}
+
+.filter-head {
+  border-bottom: 1px solid black;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.filter-content {
+  justify-content: center;
+}
+
+.price {
+  width: 3rem;
+}
+
+.price-slider {
+  flex-grow: 1;
+}
+
+
 
 @import './_mobile.scss';
