@@ -1,9 +1,18 @@
 import * as React from 'react';
 
-type PriceProps = {
+interface SetFilters {
+    (e: any): boolean,
+}
+
+interface PriceProps {
+    filters: {
+        minPrice: number,
+        maxPrice: number,
+    },
+    setFilters: SetFilters,
     minPriceFound: number,
     maxPriceFound: number,
-};
+}
 
 type PriceState = {
     minPrice: number,
@@ -23,10 +32,18 @@ export default class PriceFilter extends React.Component<PriceProps, PriceState>
         this.setState({
             minPrice: e.target.value,
         });
+        this.props.setFilters({ 
+            minPrice: e.target.value,
+            maxPrice: this.state.maxPrice,
+        });
     }
 
     setMaxPrice = (e: any) => {
         this.setState({
+            maxPrice: e.target.value,
+        });
+        this.props.setFilters({
+            minPrice: this.state.minPrice,
             maxPrice: e.target.value,
         });
     }

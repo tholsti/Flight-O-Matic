@@ -4,6 +4,7 @@ import Flight from '../Flight/Flight';
 import FindFlights from '../FindFlights/FindFlights';
 import Filters from './Filters';
 import spinner from '../../img/spinner.gif';
+import { runInThisContext } from 'vm';
 
 interface FlightData {
     dTime: number,
@@ -14,9 +15,30 @@ interface FlightData {
     route: {}[],
 }
 
-export default class FlightList extends React.Component {
-    state = {
-        flights: [],
+interface State {
+    flightsResult: {}[],
+    isLoading: boolean,
+    searched: string,
+    origin: string,
+    destination: string,
+    flightsNumber: number,
+    connectionsFound: number,
+    minPriceFound: number,
+    maxPriceFound: number,
+    filters: {
+        minPrice: number,
+        maxPrice: number,
+    },
+}
+
+interface setterFunction {
+
+}
+
+export default class FlightList extends React.Component<{}, State> {
+
+    state: State = {
+        flightsResult: [],
         isLoading: false,
         searched: 'big',
         origin: '',
@@ -25,8 +47,11 @@ export default class FlightList extends React.Component {
         connectionsFound: 0,
         minPriceFound: 0,
         maxPriceFound: 0,
-    }
-
+        filters: {
+            minPrice: 0,
+            maxPrice: 0,
+        },
+    };
 
     setRoute = (data: any) => {
         const API_URL = 'https://api.skypicker.com/flights';
@@ -45,7 +70,7 @@ export default class FlightList extends React.Component {
                 .then((json) => {
                     this.getMinAndMaxPrice(json.data);
                     this.setState({
-                        flights: json.data,
+                        flightsResult: json.data,
                         origin: data.origin,
                         destination: data.destination,
                         isLoading: false,
@@ -69,11 +94,27 @@ export default class FlightList extends React.Component {
         this.setState({
             minPriceFound: minPrice,
             maxPriceFound: maxPrice,
+            filters: {
+                minPrice: minPrice,
+                maxPrice: maxPrice,
+            },
+        });
+    }
+
+    setFilters = (value: {maxPrice: number, minPrice: number}): void => {
+        console.log(value);
+        this.setState({
+            filters: {
+                minPrice: value.minPrice,
+                maxPrice: value.maxPrice,
+            },
         });
     }
 
     showMore = () => {
-        this.setState({ flightsNumber: this.state.flightsNumber + 5 });
+        this.setState(prevState => (
+            { flightsNumber: prevState.flightsNumber + 10 }
+        ));
     }
 
     render() {
@@ -86,7 +127,7 @@ export default class FlightList extends React.Component {
                     <FindFlights action={this.setRoute} showMore={this.showMore} />
                 </header>
                 <div>
-                    {this.state.flights.length > 0
+                    {this.state.flightsResult.length > 0
                         && (
                             <h3>
                                 {`Displaying flights from ${this.state.origin} to ${this.state.destination}`}
@@ -105,11 +146,13 @@ export default class FlightList extends React.Component {
                     )
                     : (
                         <ResultsContainer
-                            flights={this.state.flights}
+                            flights={this.state.flightsResult}
                             flightsNumber={this.state.flightsNumber}
                             connectionsFound={this.state.connectionsFound}
                             maxPriceFound={this.state.maxPriceFound}
                             minPriceFound={this.state.minPriceFound}
+                            filters={this.state.filters}
+                            setFilters={this.setFilters}
                         />
                     )
                 }
@@ -134,13 +177,15 @@ export default class FlightList extends React.Component {
     }
 }
 
-const ResultsContainer = ({ flights, flightsNumber, maxPriceFound, minPriceFound, connectionsFound }: any): JSX.Element => {
+const ResultsContainer = ({ flights, flightsNumber, maxPriceFound, minPriceFound, filters, setFilters }: any): JSX.Element => {
     return (
         <div>
             {flights.length > 0
                 && (
                     <div className="results-container">
                         <Filters
+                            filters={filters}
+                            setFilters={setFilters}
                             maxPriceFound={maxPriceFound}
                             minPriceFound={minPriceFound}
                         />
@@ -161,17 +206,21 @@ const ResultsContainer = ({ flights, flightsNumber, maxPriceFound, minPriceFound
 
                             {flights.slice(0, flightsNumber).map(
                                 (flight: FlightData, index: number) => (
-                                    <Flight
-                                        number={index}
-                                        departureTime={
-                                            DateTime.fromMillis(flight.dTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
-                                        arrivalTime={
-                                            DateTime.fromMillis(flight.aTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
-                                        originCity={flight.cityFrom}
-                                        destinationCity={flight.cityTo}
-                                        flightPrice={flight.price}
-                                        stopOvers={flight.route.length - 1}
-                                    />
+                                    filters.maxPrice > flight.price
+                                    && filters.minPrice < flight.price
+                                    && (
+                                        <Flight
+                                            number={index}
+                                            departureTime={
+                                                DateTime.fromMillis(flight.dTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
+                                            arrivalTime={
+                                                DateTime.fromMillis(flight.aTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
+                                            originCity={flight.cityFrom}
+                                            destinationCity={flight.cityTo}
+                                            flightPrice={flight.price}
+                                            stopOvers={flight.route.length - 1}
+                                        />
+                                    )
                                 ),
                             )}
                         </div>
